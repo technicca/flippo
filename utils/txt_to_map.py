@@ -1,6 +1,6 @@
 # Generates a map in the format of character : ascii character for target_chars. 
 # All characters in the text file should be placed in the exact order specified in target_chars, separated by an empty line.
-# See an example in ascii.txt
+# See an example in ascii.txt and example output in cpp_map.cpp
 
 def generate_cpp_map():
     # Open your ascii.txt file
