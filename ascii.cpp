@@ -1,9 +1,12 @@
 #include <iostream>
 #include "ascii.hpp"
+#include <algorithm>
 
 void generate_ascii_art(const std::string& text) {
     unsigned height = 0;
-    for(char ch : text) {
+    std::string lower_text = text;
+    std::transform(lower_text.begin(), lower_text.end(), lower_text.begin(), ::tolower);
+    for(char ch : lower_text) {
         auto it = letters.find(ch);
         if(it != letters.end()) {
             auto w = it->second.height();
@@ -11,7 +14,7 @@ void generate_ascii_art(const std::string& text) {
         }
     }
     for(unsigned i = 0; i < height; ++i) {
-        for(char ch : text) {
+        for(char ch : lower_text) {
             auto it = letters.find(ch);
             if(it != letters.end()) {
                 const Letter& l = it->second;
