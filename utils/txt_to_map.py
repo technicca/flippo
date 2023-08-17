@@ -1,8 +1,10 @@
-# Generates a map in the format of character : ascii character for target_chars. All characters in the text file should be placed in the exact order specified in target_chars, separated by an empty line. See an example in ascii.txt
+# Generates a map in the format of character : ascii character for target_chars. 
+# All characters in the text file should be placed in the exact order specified in target_chars, separated by an empty line.
+# See an example in ascii.txt
 
 def generate_cpp_map():
     # Open your ascii.txt file
-    with open('ascii.txt', 'r') as file:
+    with open('utils/ascii.txt', 'r') as file:
         lines = file.readlines()
 
     target_chars = 'abcdefghijklmnopqrstuvwxyz0123456789!"#$%&\'()*+,-./:;<=>?[]{}'
@@ -31,7 +33,7 @@ def generate_cpp_map():
     cpp_map_code += '};\n'
 
     # Save the generated code to a file
-    with open('cpp_map.cpp', 'w') as cpp_map_code_file:
+    with open('utils/cpp_map.cpp', 'w') as cpp_map_code_file:
         cpp_map_code_file.write(cpp_map_code)
 
 
