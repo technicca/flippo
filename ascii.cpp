@@ -2,7 +2,7 @@
 #include "ascii.hpp"
 #include <algorithm>
 
-void generate_ascii_art(const std::string& text) {
+void generate_ascii_art(const std::string& text, const std::vector<std::string>& colors) {
     unsigned height = 0;
     std::string lower_text = text;
     std::transform(lower_text.begin(), lower_text.end(), lower_text.begin(), ::tolower);
@@ -18,7 +18,7 @@ void generate_ascii_art(const std::string& text) {
             auto it = letters.find(ch);
             if(it != letters.end()) {
                 const Letter& l = it->second;
-                std::cout << l(i);
+                std::cout << colors[i % colors.size()] << l(i);
             } else {
                 std::cout << std::string(letters.begin()->second.width(), ' ');
             }

@@ -37,7 +37,7 @@ private:
 };
 
 
-void generate_ascii_art(const std::string& text);
+void generate_ascii_art(const std::string& text, const std::vector<std::string>& colors);
 
 
 inline std::map<char, Letter> letters = {

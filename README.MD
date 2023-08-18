@@ -4,5 +4,6 @@
 
 TODO:
 - Add the ascii art for space
+- Add color selection, gradients, alignment (left, right, center, or specified number of pixels) for ascii art
 - Add different ascii styles
 - Turn into a library
