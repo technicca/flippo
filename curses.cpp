@@ -61,7 +61,7 @@ std::vector<std::string> convertToAsciiArt(const std::string& str, const std::ma
         }
     }
     return ascii_art;
-}
+};
 
 int main(int argc, char** argv) {
     // Initialize ncurses
