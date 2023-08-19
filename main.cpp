@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
             input += argv[i];
         }
 
-        if (command == "-ascii") {
+        if (command == "-ascii" || command == "-a") {
             generate_ascii_art(input);
         } else {
             std::reverse(input.begin(), input.end());
