@@ -1,3 +1,5 @@
+// ascii.hpp
+// This file contains the letter class and the letter map that define which character corrseponds to which ascii art character
 #ifndef ASCII_H
 #define ASCII_H
 

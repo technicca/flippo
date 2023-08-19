@@ -1,3 +1,5 @@
+// gradient.cpp
+// This file generates the gradient that's supposed to be applied to both normal text output, flipped text output, and ascii art output
 #include "gradient.hpp"
 #include <cstdlib>
 #include <iostream>

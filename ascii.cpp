@@ -1,3 +1,5 @@
+// ascii.cpp
+// ascii.cpp defines how ascii art is generated based on the provided user input
 #include <iostream>
 #include "ascii.hpp"
 #include <algorithm>

@@ -1,3 +1,5 @@
+// flip.hpp
+// This file contains the flip map for all characters
 #ifndef FLIP_H
 #define FLIP_H
 

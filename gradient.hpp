@@ -1,3 +1,4 @@
+// gradient.hpp
 #ifndef GRADIENT_H
 #define GRADIENT_H
 
