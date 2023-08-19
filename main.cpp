@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <sstream>
+#include <cxxopts.hpp>
 #include "ascii.hpp"
 #include "flip.hpp"
 
@@ -16,54 +17,48 @@ std::map<std::string, std::string> colorMap = {
 };
 
 int main(int argc, char* argv[]) {
-    if (argc > 1) {
-        std::string command;
-        std::vector<std::string> gradient;
-        std::string input;
-        int start = 1;
-        if (argv[1][0] == '-') {
-            command = argv[1];
-            start = 2;
-        }
-        if (argc > 2 && argv[2][0] == '-') {
-            std::string gradientCommand = argv[2];
-            if (gradientCommand.substr(0, 10) == "--gradient=") {
-                std::string gradientColors = gradientCommand.substr(10);
-                std::istringstream ss(gradientColors);
-                std::string color;
-                while (std::getline(ss, color, ',')) {
-                    color.erase(color.begin(), std::find_if(color.begin(), color.end(), [](int ch) {
-                        return !std::isspace(ch);
-                    }));
-                    if (colorMap.count(color) > 0) {
-                        gradient.push_back(colorMap[color]);
-                    }
-                }
-            }
-            start = 3;
-        }
-        for (int i = start; i < argc; ++i) {
-            if (i > start) input += " ";
-            input += argv[i];
-        }
+    cxxopts::Options options(argv[0], " - command line options");
+    options
+        .allow_unrecognised_options()
+        .add_options()
+        ("a,ascii", "Generate ASCII art")
+        ("f,flip", "Flip the input text")
+        ("g,gradient", "Apply a color gradient", cxxopts::value<std::vector<std::string>>())
+        ("input", "Input text", cxxopts::value<std::string>())
+        ("help", "Print help")
+    ;
 
-        if (command == "-ascii") {
-            if (!gradient.empty()) {
-                generate_ascii_art(input, gradient);
-            } else {
-                generate_ascii_art(input, {});
-            }
-        } else {
-            std::reverse(input.begin(), input.end());
-            for (char &c : input) {
-                if (flipMap.count(c) > 0) {
-                    std::cout << flipMap[c];
-                } else {
-                    std::cout << c;
+    options.parse_positional({"input"});
+    auto result = options.parse(argc, argv);
+
+    if (result.count("help")) {
+        std::cout << options.help() << std::endl;
+        exit(0);
+    }
+
+    std::string input = result["input"].as<std::string>();
+
+    if (result.count("ascii")) {
+        std::vector<std::string> gradient;
+        if (result.count("gradient")) {
+            auto colors = result["gradient"].as<std::vector<std::string>>();
+            for (const auto& color : colors) {
+                if (colorMap.count(color) > 0) {
+                    gradient.push_back(colorMap[color]);
                 }
             }
-            std::cout << std::endl;
         }
+        generate_ascii_art(input, gradient);
+    } else if (result.count("flip")) {
+        std::reverse(input.begin(), input.end());
+        for (char &c : input) {
+            if (flipMap.count(c) > 0) {
+                std::cout << flipMap[c];
+            } else {
+                std::cout << c;
+            }
+        }
+        std::cout << std::endl;
     }
 
     return 0;
