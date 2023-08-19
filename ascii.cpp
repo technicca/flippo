@@ -4,6 +4,8 @@
 #include "ascii.hpp"
 #include <algorithm>
 
+unsigned gradientIndex = 0; // This should be global or a class member
+
 void generate_ascii_art(const std::string& text, const std::vector<std::string>& colors) {
     unsigned height = 0;
     std::string lower_text = text;
@@ -20,9 +22,9 @@ void generate_ascii_art(const std::string& text, const std::vector<std::string>&
             auto it = letters.find(ch);
             if(it != letters.end()) {
                 const Letter& l = it->second;
-                std::cout << colors[i % colors.size()] << l(i);
+                std::cout << colors[gradientIndex++ % colors.size()] << l(i);
             } else {
-                std::cout << std::string(letters.begin()->second.width(), ' ');
+                std::cout << colors[gradientIndex++ % colors.size()] << std::string(letters.begin()->second.width(), ' ');
             }
         }
         std::cout << '\n';

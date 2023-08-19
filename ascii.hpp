@@ -38,7 +38,7 @@ private:
     unsigned width_;
 };
 
-
+extern unsigned gradientIndex;
 void generate_ascii_art(const std::string& text, const std::vector<std::string>& colors);
 
 

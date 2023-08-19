@@ -39,24 +39,25 @@ int main(int argc, char* argv[]) {
 
     std::string input = result["input"].as<std::string>();
 
-    if (result.count("ascii")) {
-        std::vector<std::string> gradient;
-        if (result.count("gradient")) {
-            auto colors = result["gradient"].as<std::vector<std::string>>();
-            for (const auto& color : colors) {
-                if (colorMap.count(color) > 0) {
-                    gradient.push_back(colorMap[color]);
-                }
+    std::vector<std::string> gradient;
+    if (result.count("gradient")) {
+        auto colors = result["gradient"].as<std::vector<std::string>>();
+        for (const auto& color : colors) {
+            if (colorMap.count(color) > 0) {
+                gradient.push_back(colorMap[color]);
             }
         }
+    }
+
+    if (result.count("ascii")) {
         generate_ascii_art(input, gradient);
     } else if (result.count("flip")) {
         std::reverse(input.begin(), input.end());
         for (char &c : input) {
             if (flipMap.count(c) > 0) {
-                std::cout << flipMap[c];
+                std::cout << gradient[gradientIndex++ % gradient.size()] << flipMap[c];
             } else {
-                std::cout << c;
+                std::cout << gradient[gradientIndex++ % gradient.size()] << c;
             }
         }
         std::cout << std::endl;

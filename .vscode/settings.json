@@ -69,6 +69,11 @@
         "semaphore": "cpp",
         "stop_token": "cpp",
         "thread": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "strstream": "cpp",
+        "cfenv": "cpp",
+        "condition_variable": "cpp",
+        "source_location": "cpp",
+        "mutex": "cpp"
     }
 }
